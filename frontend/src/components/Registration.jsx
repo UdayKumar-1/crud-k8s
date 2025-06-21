@@ -1,13 +1,25 @@
 import { useState } from "react";
+import axios from "axios";
 import "../App.css";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 function Registration() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "uday",
     email: "hello",
     phoneNumber: "28388",
     password: "hello",
   });
+  const handleUserRegistration = async (e) => {
+    e.preventDefault();
+    let uservalues = await axios.post(
+      "http://localhost:8080/users/registration",
+      user
+    ); 
+    navigate("/login");
+    console.log(uservalues);
+  };
   const onChangeValues = (e) => {
     const { name, value } = e.target;    
     setUser((prevUser) => ({
@@ -19,7 +31,7 @@ function Registration() {
     <>
       <Header></Header>
       <div className="container mt-5 text-center w-50">
-        <form>
+        <form onSubmit={(e) => handleUserRegistration(e)}>
           <input
             type="text"
             name="name"
