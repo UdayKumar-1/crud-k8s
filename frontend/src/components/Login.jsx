@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Header from "./Header";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -13,11 +16,24 @@ const Login = () => {
       [name]: value,
     }));
   };
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    const loginUser = await axios.get(
+      `http://localhost:8080/users/login?email=${user.email}&password=${user.password}`
+    );
+    console.log("loginUser ", loginUser.data);
+    if (typeof loginUser.data === "string") {
+      navigate("/login");
+    } else {
+      localStorage.setItem("userId", loginUser.data.id); //  userId=1
+      navigate("/crud");
+    }
+  };
   return (
     <>
       <Header />
       <div className="container mt-5 text-center w-50">
-        <form>
+        <form onSubmit={(e) => handleUserLogin(e)}>
           <br />
           <input
             type="email"
