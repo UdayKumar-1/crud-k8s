@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/CrudService-0.0.1-SNAPSHOT.jar /app/CrudService-0.0.1-SNAPSHOT.jar
 
 # Expose the port your application runs on
-EXPOSE 8080
+EXPOSE 8000
 
 # run application
 ENTRYPOINT ["java", "-jar", "/app/CrudService-0.0.1-SNAPSHOT.jar"]

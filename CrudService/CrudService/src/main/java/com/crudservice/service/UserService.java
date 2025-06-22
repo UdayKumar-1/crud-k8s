@@ -1,9 +1,9 @@
 package com.crudservice.service;
 
-import com.crudservice.entity.User;
+import com.crudservice.dto.UserDto;
 
 public interface UserService {
-    User userRegistrationService(User user);
-    User userLoginService(String name,String password);
-    User getUserRecordService(Long id);
+    UserDto userRegistrationService(UserDto user);
+    UserDto userLoginService(String name,String password);
+    UserDto getUserRecordService(Long id);
 }

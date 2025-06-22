@@ -1,23 +1,23 @@
 package com.crudservice.serviceImpl;
 
-import com.crudservice.entity.User;
-import com.crudservice.repository.UserRepository;
+import com.crudservice.dto.UserDto;
 import com.crudservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
     @Override
-    public User userRegistrationService(User user){
-        return userRepository.save(user);
+    public UserDto userRegistrationService(UserDto user){
+//        return userRepository.save(user);
+        return null;
     }
 
     @Override
-    public User userLoginService(String email,String password) {
-        User userDb =userRepository.findByEmailAndPassword(email, password);
+    public UserDto userLoginService(String email, String password) {
+        UserDto userDb =null;//userRepository.findByEmailAndPassword(email, password);
         if(userDb!=null&&userDb.getPassword().equals(password)){
             return userDb;
         }
@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
         }
     }
     @Override
-    public User getUserRecordService(Long id) {
-        User user=userRepository.findById(id).get();
+    public UserDto getUserRecordService(Long id) {
+        UserDto user=null;//userRepository.findById(id).get();
         return user.getId()!=null?user:null;
     }
 }
