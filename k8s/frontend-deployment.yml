@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: frontend-deployment
+  namespace: crud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels: 
+        app: frontend
+    spec:
+      containers:
+        - name: frontend-container
+          image: udaykumar550/frontend:latest
+          ports:
+            - containerPort: 80
