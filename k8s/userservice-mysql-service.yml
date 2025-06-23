@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: userservice-mysql-service
+  namespace: crud
+spec:
+  selector:
+    app: userservice-mysql
+  ports:
+    - protocol: TCP
+      port: 3307
+      targetPort: 3306

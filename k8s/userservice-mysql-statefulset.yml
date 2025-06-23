@@ -1,0 +1,42 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: userservice-mysql-statefulset
+  namespace: crud
+spec:
+  serviceName: userservice-mysql-service
+  selector:
+    matchLabels:
+      app: userservice-mysql
+  template:
+    metadata:
+      labels: 
+        app: userservice-mysql
+    spec:
+      containers: 
+        - name: userservice-mysql-container
+          image: mysql:latest
+          ports: 
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql  # This has to same as secret metadata name.
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-mysql  # this is also same as configmap metadata name.
+                  key: MYSQL_USER_DB
+          volumeMounts:
+            - name: userservice-volume
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: userservice-volume
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
