@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: userservice-service
+  namespace: crud
+spec:
+  selector: 
+    app: userservice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

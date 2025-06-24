@@ -5,6 +5,7 @@ metadata:
   namespace: crud
 spec:
   serviceName: userservice-mysql-service
+  replicas: 2
   selector:
     matchLabels:
       app: userservice-mysql
@@ -20,15 +21,9 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: secret-mysql  # This has to same as secret metadata name.
-                  key: MYSQL_ROOT_PASSWORD
+              value: root
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: config-mysql  # this is also same as configmap metadata name.
-                  key: MYSQL_USER_DB
+              value: userservicek8s
           volumeMounts:
             - name: userservice-volume
               mountPath: /var/lib/mysql
