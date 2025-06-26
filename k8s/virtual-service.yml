@@ -1,0 +1,36 @@
+# Istio VirtualService
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: crud-routing
+  namespace: crud
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - crud-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/users"
+      route:
+        - destination:
+            host: userservice-service.crud.svc.cluster.local
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: "/cruds"
+      route:
+        - destination:
+            host: crudservice-service.crud.svc.cluster.local
+            port:
+              number: 8000
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: frontend-service.crud.svc.cluster.local
+            port:
+              number: 80

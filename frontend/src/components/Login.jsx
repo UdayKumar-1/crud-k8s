@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ const Login = () => {
   const handleUserLogin = async (e) => {
     e.preventDefault();
     const loginUser = await axios.get(
-      `http://localhost:8080/users/login?email=${user.email}&password=${user.password}`
+      `/users/login?email=${user.email}&password=${user.password}`
     );
     console.log("loginUser ", loginUser.data);
     if (typeof loginUser.data === "string") {

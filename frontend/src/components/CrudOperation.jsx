@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 const CrudOperation = () => {
@@ -16,7 +16,7 @@ const CrudOperation = () => {
   const handleOnDelete = async (itemId) => {
     console.log("itemId ", itemId); //24
     const deletedItem = await axios.delete(
-      `http://localhost:8080/cruds/deleteRecord?id=${itemId}`
+      `/cruds/deleteRecord?id=${itemId}`
     );
     console.log("deletedItem ", deletedItem.data);
     setFetchValues(!fetchValues);
@@ -25,7 +25,7 @@ const CrudOperation = () => {
     console.log("input Text ", inputText);
     //{text:"hello",userId:""}
     const crudValues = await axios.post(
-      `http://localhost:8080/cruds/insert`,
+      `/cruds/insert`,
       { text: inputText.text, userId: localStorage.getItem("userId") }
       //{text:"hello",userId:"1"}
     );
@@ -33,7 +33,7 @@ const CrudOperation = () => {
   };
   const fetchAllRecords = async () => {
     const allRecords = await axios.get(
-      "http://localhost:8080/cruds/allItems"
+      "/cruds/allItems"
     ); //2 //3
     console.log("allRecords ", allRecords.data);
     setAllData(allRecords.data);
@@ -69,7 +69,7 @@ const CrudOperation = () => {
             >
               <div className="col-sm-4"></div>
               <div className="col-sm-2">
-                <span>{item.userId}</span>
+                <span>{item.user.name}</span>
               </div>
               <div className="col-sm-3">
                 <span>{item.text}</span>

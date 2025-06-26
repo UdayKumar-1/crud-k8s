@@ -54,3 +54,20 @@ Secure and efficient internal communication between services
 Traffic routing and observability
 
 No Ingress controller is used; Istio handles all service-level routing
+
+
+To Install Istio 
+
+curl -L https://istio.io/downloadIstio | sh -
+
+
+cd istio-1.26.2
+
+
+export PATH=$PWD/bin:$PATH
+
+
+kubectl label namespace default istio-injection=enabled
+
+
+istioctl install --set profile=demo -y

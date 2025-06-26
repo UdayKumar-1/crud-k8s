@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../App.css";
 import Header from "./Header";
@@ -14,17 +14,17 @@ function Registration() {
   const handleUserRegistration = async (e) => {
     e.preventDefault();
     let uservalues = await axios.post(
-      "http://localhost:8080/users/registration",
+      "/users/registration",
       user
     ); 
     navigate("/login");
     console.log(uservalues);
   };
   const onChangeValues = (e) => {
-    const { name, value } = e.target;    
+    const { name, value } = e.target;    //helllo 
     setUser((prevUser) => ({
       ...prevUser,
-      [name]: value,   
+      [name]: value,   // email: hello
     }));
   };
   return (
