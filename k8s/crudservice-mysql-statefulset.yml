@@ -1,35 +1,35 @@
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
-  name: userservice-mysql-statefulset
+  name: crudservice-mysql-statefulset
   namespace: crud
 spec:
-  serviceName: userservice-mysql-service
+  serviceName: crudservice-mysql-service
   replicas: 1
   selector:
     matchLabels:
-      app: userservice-mysql
+      app: crudservice-mysql
   template:
     metadata:
-      labels: 
-        app: userservice-mysql
+      labels:
+        app: crudservice-mysql
     spec:
-      containers: 
-        - name: userservice-mysql-container
+      containers:
+        - name: crudservice-mysql-container
           image: mysql:latest
-          ports: 
+          ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: root
             - name: MYSQL_DATABASE
-              value: userservicek8s
+              value: crudservicek8s
           volumeMounts:
-            - name: userservice-volume
+            - name: crudservice-volume
               mountPath: /var/lib/mysql
   volumeClaimTemplates:
     - metadata:
-        name: userservice-volume
+        name: crudservice-volume
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

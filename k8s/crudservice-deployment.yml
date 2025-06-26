@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata: 
+  name: crudservice-deployment
+  namespace: crud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crudservice
+  template:
+    metadata:
+      labels:
+        app: crudservice
+    spec:
+      containers: 
+        - name: crudservice-container 
+          image: udaykumar550/crudservice:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVER_PORT
+              value: "8000"
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://crudservice-mysql-service.crud.svc.cluster.local:3306/crudservicek8s
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "root"

@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: frontend-service
+  name: crudservice-service
   namespace: crud
 spec:
   selector:
-    app: frontend
+    app: crudservice
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8000
+      targetPort: 8000
