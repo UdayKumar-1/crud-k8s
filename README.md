@@ -14,18 +14,15 @@ Login Page
 
 CRUD Operations Page
 
-🛠️ Backend Services
-user-service (Spring Boot)
+🛠️ Backend Microservices
 
-Handles user registration
+📦 user-service (Spring Boot)
+- Handles user registration and Login
+- Connects to a dedicated MySQL database
 
-Connected to UserService MySQL instance
-
-crud-service (Spring Boot)
-
-Manages CRUD operations
-
-Connected to a separate CrudService MySQL instance
+📦 crud-service (Spring Boot)
+- Performs CRUD operations
+- Connects to its own MySQL instance
 
 ☸️ Kubernetes Components Used
 Namespaces
@@ -56,18 +53,17 @@ Traffic routing and observability
 No Ingress controller is used; Istio handles all service-level routing
 
 
-To Install Istio 
-
+# Download Istio CLI
 curl -L https://istio.io/downloadIstio | sh -
 
-
+# Navigate to the Istio directory
 cd istio-1.26.2
 
-
+# Add Istio CLI to your path
 export PATH=$PWD/bin:$PATH
 
-
+# Enable sidecar injection for the default namespace
 kubectl label namespace default istio-injection=enabled
 
-
+# Install Istio with the demo profile
 istioctl install --set profile=demo -y
