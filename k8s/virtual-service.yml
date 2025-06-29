@@ -15,7 +15,7 @@ spec:
             prefix: "/users"
       route:
         - destination:
-            host: userservice-service.crud.svc.cluster.local
+            host: userservice-service
             port:
               number: 8080
     - match:
@@ -23,7 +23,7 @@ spec:
             prefix: "/cruds"
       route:
         - destination:
-            host: crudservice-service.crud.svc.cluster.local
+            host: crudservice-service
             port:
               number: 8000
     - match:
@@ -31,6 +31,6 @@ spec:
             prefix: "/"
       route:
         - destination:
-            host: frontend-service.crud.svc.cluster.local
+            host: frontend-service
             port:
               number: 80
