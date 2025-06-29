@@ -20,10 +20,22 @@ spec:
             - containerPort: 8000
           env:
             - name: SERVER_PORT
-              value: "8000"
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: CRUDSERVICE_PORT
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://crudservice-mysql-service.crud.svc.cluster.local:3306/crudservicek8s
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: CRUDSERVICE_DATASOURCE_URL
             - name: SPRING_DATASOURCE_USERNAME
-              value: "root"
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: CRUDSERVICE_DATASOURCE_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "root"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql
+                  key: MYSQL_ROOT_PASSWORD

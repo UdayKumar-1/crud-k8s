@@ -19,9 +19,23 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: USERSERVICE_PORT
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://userservice-mysql-service.crud.svc.cluster.local:3306/userservicek8s"
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: USERSERVICE_DATASOURCE_URL
             - name: SPRING_DATASOURCE_USERNAME
-              value: "root"
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: USERSERVICE_DATASOURCE_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "root"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql
+                  key: MYSQL_ROOT_PASSWORD

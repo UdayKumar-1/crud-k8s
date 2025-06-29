@@ -21,9 +21,15 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: secret-mysql
+                  key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
-              value: crudservicek8s
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: MYSQL_CRUD_DB
           volumeMounts:
             - name: crudservice-volume
               mountPath: /var/lib/mysql

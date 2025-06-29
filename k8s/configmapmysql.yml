@@ -1,8 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: config-mysql
-  namespace: crud
-data:
-  MYSQL_USER_DB: userservicek8s
-  MYSQL_CRUD_DB: crudservicek8s

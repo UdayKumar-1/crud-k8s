@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config
+  namespace: crud
+data:
+  MYSQL_USER_DB: userservicek8s
+  MYSQL_CRUD_DB: crudservicek8s
+  USERSERVICE_PORT: "8080"
+  CRUDSERVICE_PORT: "8000"
+  USERSERVICE_DATASOURCE_URL: "jdbc:mysql://userservice-mysql-service.crud.svc.cluster.local:3306/userservicek8s"
+  CRUDSERVICE_DATASOURCE_URL: "jdbc:mysql://crudservice-mysql-service.crud.svc.cluster.local:3306/crudservicek8s"
+  USERSERVICE_DATASOURCE_USERNAME: "root"
+  CRUDSERVICE_DATASOURCE_USERNAME: "root"    
