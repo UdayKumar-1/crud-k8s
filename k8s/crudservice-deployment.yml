@@ -13,6 +13,17 @@ spec:
       labels:
         app: crudservice
     spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              until nslookup crudservice-mysql-statefulset-0.crudservice-mysql-service.crud.svc.cluster.local; do     #<pod-name>.<service-name>.<namespace>.svc.cluster.local
+                echo "Waiting for MySQL..."
+                sleep 5
+              done
       containers: 
         - name: crudservice-container 
           image: udaykumar550/crudservice:latest

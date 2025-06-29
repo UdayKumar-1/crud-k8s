@@ -13,6 +13,17 @@ spec:
       labels:
         app: userservice
     spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              until nslookup userservice-mysql-statefulset-0.userservice-mysql-service.crud.svc.cluster.local; do     #<pod-name>.<service-name>.<namespace>.svc.cluster.local
+                echo "Waiting for MySQL..."
+                sleep 5
+              done
       containers:
         - name: userservice-container
           image: udaykumar550/userservice:latest
