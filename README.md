@@ -67,3 +67,12 @@ kubectl label namespace default istio-injection=enabled
 
 # Install Istio with the demo profile
 istioctl install --set profile=demo -y
+
+kubectl apply -f istio-1.26.2/samples/addons
+
+#check grafana,prometheus,jaeger,kiali are running or not.
+kubectl get pods -n istio-system
+
+#it will run http://localhost:3000 port by executing below command.
+istioctl dashboard grafana
+
