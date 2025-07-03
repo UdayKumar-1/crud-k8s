@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: crudservice-mysql-vpa
+  namespace: crud
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: StatefulSet
+    name: crudservice-mysql-statefulset
+  updatePolicy:
+    updateMode: "Auto"   # Disadvantage if we do auto there might be downtime.
