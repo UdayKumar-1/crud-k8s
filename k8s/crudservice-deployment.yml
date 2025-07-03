@@ -29,6 +29,13 @@ spec:
           image: udaykumar550/crudservice:latest
           ports:
             - containerPort: 8000
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
           env:
             - name: SERVER_PORT
               valueFrom:
