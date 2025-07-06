@@ -63,7 +63,7 @@ cd istio-1.26.2
 export PATH=$PWD/bin:$PATH
 
 # Enable sidecar injection for the default namespace
-kubectl label namespace default istio-injection=enabled
+kubectl label namespace crud istio-injection=enabled
 
 # Install Istio with the demo profile
 istioctl install --set profile=demo -y
